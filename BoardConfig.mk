@@ -1,14 +1,10 @@
 #
-# Draft BoardConfig.mk for E12 (MT6761, A/B + dynamic partitions)
-# Values come from the TWRP tree; items marked TODO need your own numbers.
-# Intentionally NOT carried over from the TWRP tree: TW_* flags, the 2099
-# security patch hack, PLATFORM_VERSION, ALLOW_MISSING_DEPENDENCIES,
-# BOARD_BUILD_SYSTEM_ROOT_IMAGE.
+# BoardConfig.mk for E12 (MT6761, Virtual A/B + Dynamic Partitions)
 #
 
 DEVICE_PATH := device/e12/E12
 
-# Architecture (confirm with ro.vendor.product.cpu.abilist)
+# Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -28,9 +24,11 @@ TARGET_BOARD_PLATFORM := mt6761
 TARGET_BOOTLOADER_BOARD_NAME := k61v1_64_bsp
 TARGET_NO_BOOTLOADER := true
 TARGET_SCREEN_DENSITY := 320
+BOARD_VNDK_VERSION := current
 
-# A/B (keep only partitions that lpdump / by-name actually lists)
+# A/B & Virtual A/B
 AB_OTA_UPDATER := true
+ENABLE_VIRTUAL_AB := true
 AB_OTA_PARTITIONS := \
     boot \
     dtbo \
@@ -45,9 +43,7 @@ AB_OTA_PARTITIONS := \
 BOARD_USES_RECOVERY_AS_BOOT := true
 TARGET_NO_RECOVERY := true
 
-# Kernel / boot image (prebuilt)
-# Confirmed with unpack_bootimg on stock boot_a: header v2, base 0x40078000,
-# kernel 0x40080000, ramdisk 0x51b00000, tags/dtb 0x47880000, page size 2048
+# Kernel / Boot Image (Header v2)
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -68,19 +64,10 @@ TARGET_FORCE_PREBUILT_KERNEL := true
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
-# DTB is a separate section inside the stock boot image (98725 bytes).
-# Use boot_x/dtb from unpack_bootimg as prebuilt/dtb.img.
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
-# Partition sizes
-BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
-BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Dynamic partitions
-# Super size is from the stock GPT (5 GiB). The TWRP tree's 9126805504 is a
-# generator placeholder, ignore it.
-# Stock only has system/vendor/product; confirm with lpunpack later.
+# Dynamic Partitions
 BOARD_SUPER_PARTITION_SIZE := 5368709120
 BOARD_SUPER_PARTITION_GROUPS := e12_dynamic_partitions
 BOARD_E12_DYNAMIC_PARTITIONS_PARTITION_LIST := \
@@ -89,12 +76,11 @@ BOARD_E12_DYNAMIC_PARTITIONS_PARTITION_LIST := \
     product \
     vendor
 
-# Virtual A/B (confirmed: stock ramdisk ships snapuserd, userdata uses
-# checkpoint=fs). One copy lives in super, snapshots use the free space,
-# so group = super - 4 MiB.
 BOARD_E12_DYNAMIC_PARTITIONS_SIZE := 5364514816
 
-# Filesystems (TODO: confirm each against the stock images from lpunpack)
+# Filesystems
+BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
+BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -108,12 +94,12 @@ TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
 TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 
-# Verified boot (disabled flags until the build is known to boot)
+# AVB / Security
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
-# See device.mk for dynamic partitions, shipping API level, Virtual A/B
-# and update_engine.
+# SELinux
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
-# Inherit vendor BoardConfig
+# Inherit Vendor BoardConfig
 -include vendor/e12/E12/BoardConfigVendor.mk
