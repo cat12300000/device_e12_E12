@@ -114,3 +114,6 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # See device.mk for dynamic partitions, shipping API level, Virtual A/B
 # and update_engine.
+
+# Inherit vendor BoardConfig
+-include vendor/e12/E12/BoardConfigVendor.mk
