@@ -1,0 +1,14 @@
+# Graphics / Display
+vendor/lib64/hw/gralloc.mt6761.so
+vendor/lib64/hw/hwcomposer.mt6761.so
+
+# Audio
+vendor/lib64/hw/audio.primary.mt6761.so
+vendor/lib/hw/audio.primary.mt6761.so
+
+# Radio / RIL
+vendor/lib64/librilmtk.so
+vendor/lib/librilmtk.so
+
+# Connectivity
+vendor/firmware/WMT_SOC.bin
