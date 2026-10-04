@@ -1,4 +1,4 @@
-# a unoffical  LineageOS Device Tree for north korean E12 (MT6761)
+# a unofficial  LineageOS Device Tree for north korean E12 (MT6761)
 
 The north korean E12 is an entry-level smartphone powered by the MediaTek MT6761 (Helio A22) SoC.
 
