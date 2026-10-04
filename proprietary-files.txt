@@ -1,14 +1,38 @@
-# Graphics / Display
-vendor/lib64/hw/gralloc.mt6761.so
+# Graphics & Hardware Composer
+vendor/bin/hw/android.hardware.graphics.allocator@4.0-service-mediatek
+vendor/bin/hw/android.hardware.graphics.composer@2.1-service
+vendor/etc/init/android.hardware.graphics.allocator@4.0-service-mediatek.rc
+vendor/etc/init/android.hardware.graphics.composer@2.1-service.rc
+vendor/etc/vintf/manifest/manifest_hwcomposer.xml
+vendor/lib/android.hidl.allocator@1.0.so
+vendor/lib64/android.hardware.graphics.composer@2.1-resources.so
+vendor/lib64/android.hardware.graphics.composer@2.1.so
+vendor/lib64/android.hidl.allocator@1.0.so
 vendor/lib64/hw/hwcomposer.mt6761.so
+vendor/lib64/libcomposer_ext.so
+vendor/lib64/vendor.mediatek.hardware.composer_ext@1.0.so
 
 # Audio
-vendor/lib64/hw/audio.primary.mt6761.so
+vendor/lib/hw/audio.primary.default.so
 vendor/lib/hw/audio.primary.mt6761.so
+vendor/lib64/hw/audio.primary.default.so
+vendor/lib64/hw/audio.primary.mt6761.so
 
 # Radio / RIL
-vendor/lib64/librilmtk.so
-vendor/lib/librilmtk.so
-
-# Connectivity
-vendor/firmware/WMT_SOC.bin
+vendor/bin/hw/mtkfusionrild
+vendor/etc/init/mtkrild.rc
+vendor/lib/libmtkrillog.so
+vendor/lib/libreference-ril.so
+vendor/lib/libril.so
+vendor/lib/librilutils.so
+vendor/lib64/libmtk-fusion-ril-prop-vsim.so
+vendor/lib64/libmtk-ril.so
+vendor/lib64/libmtkmipc-ril.so
+vendor/lib64/libmtkrillog.so
+vendor/lib64/libmtkrilutils.so
+vendor/lib64/libreference-ril.so
+vendor/lib64/libril.so
+vendor/lib64/librilfusion.so
+vendor/lib64/librilutils.so
+vendor/lib64/libvia-ril.so
+vendor/lib64/libviamipc-ril.so
