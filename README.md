@@ -14,5 +14,4 @@ The north korean E12 is an entry-level smartphone powered by the MediaTek MT6761
 | **Stock Android Version** | Android 12 (VNDK 31) |
 | **Partition Scheme** | Dynamic Partitions (Super) + Virtual A/B
 
-
-this is made with some ai help if you do not like that fact yap all you want i do not care.
+:3
