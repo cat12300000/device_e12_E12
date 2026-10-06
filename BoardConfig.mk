@@ -103,3 +103,4 @@ BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Inherit Vendor BoardConfig
 -include vendor/e12/E12/BoardConfigVendor.mk
+TARGET_SUPPORTS_64_BIT_APPS
