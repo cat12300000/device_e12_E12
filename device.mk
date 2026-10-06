@@ -3,7 +3,7 @@
 # Stock vendor is Android 12 (VNDK 31)
 #
 
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := device/e12/E12
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
